@@ -1,236 +1,388 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trading Education Community</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Munaaf Trader - Official</title>
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #07090e;
+            --card-bg: #111723;
+            --card-border: #1e293b;
+            --accent-green: #10b981;
+            --accent-gold: #ffb703;
+            --accent-blue: #0088cc;
+            --accent-red: #ef4444;
+            --text-white: #ffffff;
+            --text-sub: #cbd5e1;
+            --text-muted: #64748b;
+        }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-body {
-    background: #ffffff;
-    font-family: Arial, sans-serif;
-    color: #ffffff;
-}
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 12px;
+        }
 
-.page-container {
-    max-width: 500px;
-    min-height: 100vh;
-    margin: 20px auto;
-    padding: 23px 16px;
-    border: 2px solid #f0aaff;
-    text-align: center;
-    background: #ffffff;
-}
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 24px 18px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
 
-/* Profile Image */
-.profile {
-    width: 145px;
-    height: 145px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #00c9d9;
-    box-shadow: 0 0 25px rgba(0, 190, 220, 0.35);
-    margin: 0 auto;
-    display: block;
-}
+        /* Top Market Bar */
+        .market-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 700;
+            background: #090d16;
+            padding: 8px 14px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            border: 1px solid #1a2332;
+        }
 
-/* Host */
-.host {
-    margin-top: 68px;
-    color: #8999b4;
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
+        .green { color: var(--accent-green); }
 
-/* Heading */
-.heading {
-    margin-top: 34px;
-    color: #11c9e9;
-    font-size: 24px;
-    font-weight: bold;
-}
+        /* Logo Profile Header */
+        .logo-box {
+            position: relative;
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 10px;
+        }
 
-/* Telegram Button */
-.telegram-btn {
-    margin-top: 65px;
-    width: 100%;
-    min-height: 64px;
-    border-radius: 17px;
-    background: linear-gradient(110deg, #10a5e7, #0089c9);
-    box-shadow: 0 5px 22px rgba(0, 150, 210, 0.35);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    text-decoration: none;
-    transition: 0.3s;
-}
+        .logo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid var(--accent-gold);
+            object-fit: cover;
+            background-color: #ffffff;
+            display: block;
+        }
 
-.telegram-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(0, 150, 210, 0.5);
-}
+        .verified-badge {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            background: var(--accent-blue);
+            color: #ffffff;
+            font-size: 11px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--card-bg);
+        }
 
-.telegram-btn svg {
-    width: 23px;
-    height: 23px;
-    fill: white;
-}
+        .brand-name {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-white);
+            letter-spacing: 0.5px;
+        }
 
-/* Disclaimer */
-.small-text {
-    color: #b9c9df;
-    font-size: 13px;
-    line-height: 23px;
-    margin: 19px 0 31px;
-}
+        .brand-sub {
+            font-size: 10px;
+            color: var(--accent-gold);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
 
-/* Feature Cards */
-.features {
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
-}
+        /* Active Online Pill */
+        .live-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
 
-.feature {
-    background: #172438;
-    border: 1px solid #31435e;
-    min-height: 64px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    text-align: left;
-    padding: 15px 21px;
-    gap: 16px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-}
+        .dot {
+            width: 7px;
+            height: 7px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: pulse 1.5s infinite;
+        }
 
-.dot {
-    width: 11px;
-    height: 11px;
-    min-width: 11px;
-    border-radius: 50%;
-    background: #09c58d;
-    box-shadow: 0 0 10px rgba(9,197,141,0.5);
-}
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
 
-.feature p {
-    font-size: 14px;
-    line-height: 21px;
-    color: #ffffff;
-    font-weight: bold;
-}
+        /* Main Headlines - Bright High Contrast */
+        .main-heading {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff !important;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
 
-/* Footer */
-.footer {
-    margin-top: 39px;
-    padding-top: 23px;
-    border-top: 1px solid #27354c;
-    color: #9aabc4;
-    font-size: 12px;
-    line-height: 21px;
-}
+        .sub-heading {
+            font-size: 13px;
+            color: var(--text-sub) !important;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
 
-/* Mobile Responsive */
-@media(max-width: 520px) {
-    .page-container {
-        margin: 0 auto;
-        width: 100%;
-        border-left: 2px solid #f0aaff;
-        border-right: 2px solid #f0aaff;
-    }
+        /* Telegram CTA Button */
+        .cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #0088cc 0%, #005580 100%);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 15px;
+            padding: 16px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.4);
+            margin-bottom: 8px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
 
-    .host {
-        margin-top: 65px;
-    }
+        .cta-btn:active {
+            transform: scale(0.98);
+        }
 
-    .heading {
-        font-size: 23px;
-    }
+        .btn-hint {
+            font-size: 11px;
+            color: var(--accent-gold);
+            margin-bottom: 22px;
+            font-weight: 600;
+        }
 
-    .telegram-btn {
-        margin-top: 60px;
-    }
-}
-</style>
+        /* Learning Feature Cards */
+        .card {
+            background-color: #0c1018;
+            border-radius: 12px;
+            padding: 12px 14px;
+            text-align: left;
+            margin-bottom: 10px;
+            border: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .card-desc {
+            color: var(--text-sub);
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            font-size: 10px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            text-align: justify;
+            border-top: 1px solid var(--card-border);
+            padding-top: 12px;
+            margin-top: 16px;
+        }
+
+        /* Anti-Bot Alert Box */
+        #bot-alert {
+            display: none;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid var(--accent-red);
+            color: #fca5a5;
+            font-size: 11px;
+            padding: 8px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="page-container">
-
-    <!-- Profile Image -->
-    <img
-        src="YOUR-PROFILE-IMAGE-URL"
-        alt="Community Host"
-        class="profile"
-    >
-
-    <!-- Host Title -->
-    <div class="host">COMMUNITY HOST</div>
-
-    <!-- Main Heading -->
-    <h1 class="heading">Trading Education</h1>
-
-    <!-- Telegram Button -->
-    <a
-        href="YOUR-TELEGRAM-LINK"
-        class="telegram-btn"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        <svg viewBox="0 0 24 24">
-            <path d="M21.5 3.5L18.2 20c-.25 1.17-.94 1.46-1.9.91l-5.25-3.87-2.53 2.44c-.28.28-.52.52-1.07.52l.38-5.34 9.72-8.78c.42-.38-.09-.59-.65-.21L4.9 13.22l-5.16-1.61c-1.12-.35-1.14-1.12.23-1.65L20.1 2.4c.94-.34 1.76.23 1.4 1.1z" transform="translate(1 0) scale(.95)"/>
-        </svg>
-        JOIN TELEGRAM
-    </a>
-
-    <!-- Disclaimer -->
-    <p class="small-text">
-        Free educational community � No investment advice �
-        Trading involves risk
-    </p>
-
-    <!-- Features -->
-    <div class="features">
-
-        <div class="feature">
-            <span class="dot"></span>
-            <p>Chart analysis &amp; market structure basics</p>
+    <div class="container">
+        <!-- Market Ticker -->
+        <div class="market-bar">
+            <span class="green">🟢 NIFTY 50 +0.85%</span>
+            <span class="green">🟢 BTC $94,200 (+2.4%)</span>
         </div>
 
-        <div class="feature">
-            <span class="dot"></span>
-            <p>Risk management principles explained simply</p>
+        <!-- Clean Circular Logo -->
+        <div class="logo-box">
+            <img src="https://rinkumunaafusa.space/wp-content/uploads/2026/10/images-15.jpg" class="logo" alt="Munaaf Trader Logo">
+            <div class="verified-badge"><i class="fa-solid fa-check"></i></div>
         </div>
 
-        <div class="feature">
-            <span class="dot"></span>
-            <p>Trading psychology &amp; structured learning</p>
+        <div class="brand-name">Munaaf Trader</div>
+        <div class="brand-sub">LEARNING COMMUNITY</div>
+
+        <!-- Live Active Members -->
+        <div class="live-tag">
+            <span class="dot"></span> <span id="online-count">1,840</span> Active Members Online
         </div>
 
+        <!-- Headlines -->
+        <h1 class="main-heading">Learn Trading Step-By-Step</h1>
+        <p class="sub-heading">Simple educational lessons, price action & daily market guidance.</p>
+
+        <!-- Bot Alert -->
+        <div id="bot-alert">⚠️ Security check verified. Tap button once again.</div>
+
+        <!-- Main Button -->
+        <button id="cta-btn" class="cta-btn">
+            <i class="fa-brands fa-telegram fa-xl"></i> JOIN FREE TELEGRAM
+        </button>
+        <div class="btn-hint">👇 Click 'Request to Join' on Telegram 👇</div>
+
+        <!-- Features with Visible Badges -->
+        <div class="card">
+            <div class="card-icon" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div>
+                <div class="card-title">Stock Market Fundamentals</div>
+                <div class="card-desc">Basic to advanced share market learning step-by-step.</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon" style="background: rgba(255, 183, 3, 0.2); color: #ffb703;">
+                <i class="fa-solid fa-candlestick-chart"></i>
+            </div>
+            <div>
+                <div class="card-title">Chart Reading & Analysis</div>
+                <div class="card-desc">Master price action, support & resistance patterns.</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div>
+                <div class="card-title">Risk Management & Psychology</div>
+                <div class="card-desc">Protect your capital and build trading discipline.</div>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+            <b>Disclaimer:</b> Educational purpose only. We are not SEBI registered advisors. Trading in stock market involves financial risk. No financial advice or profit guarantees provided.
+        </div>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        Educational information only. This community does
-        not provide personalized investment advice.
-        Trading involves financial risk. Always do your
-        own research before making financial decisions.
-    </div>
+    <!-- ANTI-BOT CLICK PROTECTION SCRIPT -->
+    <script>
+        // Updated Telegram Link
+        const TELEGRAM_URL = "https://t.me/+X9jam-DWrUoyNzM9";
 
-</div>
+        let isHuman = false;
+        let lastClick = 0;
+        let clickCount = 0;
 
+        function markHuman() { isHuman = true; }
+        window.addEventListener('touchstart', markHuman, { once: true });
+        window.addEventListener('mousemove', markHuman, { once: true });
+        window.addEventListener('scroll', markHuman, { once: true });
+
+        function isBotAgent() {
+            return /bot|googlebot|crawler|spider|facebookexternalhit|MetaInspector|headless/i.test(navigator.userAgent) || navigator.webdriver;
+        }
+
+        const ctaBtn = document.getElementById('cta-btn');
+        const alertBox = document.getElementById('bot-alert');
+
+        ctaBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const now = new Date().getTime();
+
+            if (isBotAgent()) return false;
+
+            if (now - lastClick < 1200) {
+                clickCount++;
+                if (clickCount > 2) {
+                    alertBox.innerText = "⚠️ Frequent clicks detected. Please wait 2 seconds.";
+                    alertBox.style.display = "block";
+                    return false;
+                }
+            } else {
+                clickCount = 1;
+            }
+            lastClick = now;
+
+            if (!isHuman) {
+                isHuman = true;
+                alertBox.style.display = "block";
+                return false;
+            }
+
+            window.location.href = TELEGRAM_URL;
+        });
+
+        // Online counter simulation
+        setInterval(() => {
+            const el = document.getElementById('online-count');
+            if(el) {
+                let val = parseInt(el.innerText.replace(',',''));
+                el.innerText = (val + Math.floor(Math.random() * 5) - 2).toLocaleString();
+            }
+        }, 3000);
+    </script>
 </body>
 </html>
